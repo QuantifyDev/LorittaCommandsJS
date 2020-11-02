@@ -15,14 +15,6 @@ exports.run = async (client, message) =>{
     const hora = message.channel.createdAt.getHours();
     const minutos = message.channel.createdAt.getMinutes();
 
-    function nsfw() {
-        if(message.channel.nsfw === true){
-            return "Sim";
-        }else{
-            return "Não";
-        }
-    }
-
     const embed = new Discord.RichEmbed()
         .setAuthor(`${message.author.username}`, message.author.avatarURL)
         .setDescription(`Informações do canal ${message.channel.name}`)
@@ -30,6 +22,6 @@ exports.run = async (client, message) =>{
         .addField(`ID do Canal`, `${message.channel.id}`, true)
         .addField(`Criado em`, `${diadasemana}, ${dia} de ${mess} de ${ano} às ${hora}:${minutos}`, true)
         .addField(`Tópico`, `${message.channel.topic !== null ? `${message.channel.topic}` : 'Não definido'}`, true)
-        .addField(`NSFW Ativado`, `${nsfw()}`, true);
+        .addField(`NSFW Ativado`, `${message.channel.nsfw ? 'Sim' : 'Não'}`, true);
     message.reply(embed);
 };
